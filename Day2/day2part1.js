@@ -11,8 +11,6 @@ for (const line of inputArray){
 
     const [instruction, value] = line.split(' ');
 
-   console.log([instruction, value]); 
-
     switch (instruction) {
         case 'forward':
             horizontal += parseInt(value, 10);
