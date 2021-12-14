@@ -9,9 +9,6 @@ const inputArray = input.split("\n");
 let gammaArray = [];
 let epsilonArray = [];
 
-
-//Read each digit of each position of each line, determine the most common, add the most common at the first position of gamma
-let index = 0;
 for (let i = 0; i < 12; i++) {
     let zeroCounter = 0;
     let oneCounter = 0;
@@ -19,7 +16,7 @@ for (let i = 0; i < 12; i++) {
     let arrayOfDigits;
     for (const line of inputArray){
         arrayOfDigits = line.split("");
-        if (parseInt(arrayOfDigits[index], 10) > 0) {
+        if (parseInt(arrayOfDigits[i], 10) > 0) {
             oneCounter++;
         } else {
             zeroCounter++;
@@ -32,7 +29,6 @@ for (let i = 0; i < 12; i++) {
         gammaArray.push("1");
         epsilonArray.push("0");
     }
-    index ++; 
 };
 
 const gammaBinary = gammaArray.join('');
