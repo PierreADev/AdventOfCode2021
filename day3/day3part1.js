@@ -21,7 +21,7 @@ for (let i = 0; i < 12; i++) {
         } else {
             zeroCounter++;
         }
-        }
+    }
     if (zeroCounter > oneCounter) {
         gammaArray.push("0");
         epsilonArray.push("1");
