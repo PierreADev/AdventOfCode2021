@@ -4,7 +4,7 @@ const input = readFileSync("input.data", { encoding: "utf-8" });
 
 const vents = input.split("\n");
 
-let diagram = [];
+let points = [];
 
 function Point(x, y, occurence) {
     this.x = x;
@@ -15,19 +15,54 @@ function Point(x, y, occurence) {
 for (const vent of vents) {
     const [startPoint, endPoint] = vent.split (" -> ");
     const [x1, y1] = startPoint.split (',').map(Number);
-    const [x2, y2] = endPoint.splint (',').map(Number);
+    const [x2, y2] = endPoint.split (',').map(Number);
 
-    switch (vent) {
-        case ((x1 == x2) && ((y1 - y2) > 0)) :
-           for (let i = y1; i = y2; i--) {
-               //rajouter le cas si le point n'existe pas, le créer
-               diagram.push(new Point(x,))
-               // else occurence ++;
+    if ((x1 == x2) && ((y1 - y2) > 0)) {
+        for (let i = y2; i < (y1 + 1); i++) {
+            const yExists = (point) => (point.x == x1 && point.y == i);
+            if (points.findIndex(yExists) > -1) {
+                points[points.findIndex(yExists)].occurence ++
 
-               //ajouter les autres cas
-           } 
-
+            } else {
+                   points.push(new Point (x1, i, 1));
+               }
+        }    
+    } else if ((x1 == x2) && ((y1 - y2) < 0)) {;
+        for (let i = y1; i < (y2 + 1); i++) {
+            const yExists = (point) => (point.x == x1 && point.y == i);
+            if (points.findIndex(yExists) > -1) {  
+                points[points.findIndex(yExists)].occurence ++
+            } else {
+                points.push(new Point (x1, i, 1));
+                }
+        }
+    } else if ((y1 == y2) && ((x1 - x2) > 0)) {
+        for (let i = x2; i < (x1 + 1); i++) {
+            const xExists = (point) => (point.y == y1 && point.x == i);
+            if (points.findIndex(xExists) > -1) {  
+                points[points.findIndex(xExists)].occurence ++
+            } else {
+                points.push(new Point (i, y1, 1));
+            }
+        }    
+    } else if ((y1 == y2) && ((x1 - x2) < 0)) {
+        for (let i = x1; i < (x2 + 1); i++) {
+            const xExists = (point) => (point.y == y1 && point.x == i);
+            if (points.findIndex(xExists) > -1) {  
+                points[points.findIndex(xExists)].occurence ++
+            } else {
+                points.push(new Point (i, y1, 1));
+            }
+        }
     }
 }
 
-//créer une bouche sur diagram et compter le nombre d'objets avec occurence > 1
+//créer une boucle sur points et compter le nombre d'objets avec occurence > 1
+let overlaps = 0;
+for (const point of points) {
+    if (point.occurence > 1) {
+        overlaps++;
+    }
+}
+
+console.log(overlaps);
